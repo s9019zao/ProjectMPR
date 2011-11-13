@@ -47,28 +47,6 @@ public class Studies {
 	public void setSubiects(List<Subiect> subiects) {
 		this.subiects = subiects;
 	}
-	
-	public void removeStudent(String name) {
-		int position = 0;
-		for (Student student : students) {
-			if (student.getName().equals(name)) {
-				students.remove(position);
-				break;
-			}
-			position++;
-		}
-	}
-	
-	public void removeSubiect(String name) {
-		int position = 0;
-		for (Subiect subiect : subiects) {
-			if (subiect.getName().equals(name)) {
-				subiects.remove(position);
-				break;
-			}
-			position++;
-		}
-	}
 
 	public void addStudent (int iD_number, String name){
 		students.add(new Student(iD_number, name));
@@ -80,22 +58,47 @@ public class Studies {
 		
 	}
 	
-	public void searchStudent(String name) {
-		
-		System.out.println("Search Student:");
-		for (Student student : students) {
-			if (student.getName().equals(name))
-			student.printStudent();
-		}
-		
+	public void removeStudent(String name) {
+		students.remove(searchStudent(name));
 	}
 	
-	public void searchSubiect(String name){ 
+	public void removeSubiect(String name) {
+		subiects.remove(searchSubiect(name));
+	}
+	
+	public Student searchStudent(String name) {
+	
+		for (Student student : students) {
+			if (student.getName().equals(name))
+			return student;
+		}
+		return null;
+	}
+	
+	public Subiect searchSubiect(String name){ 
 		
-		System.out.println("Search Subiects:");
 		for (Subiect subiect : subiects) {
 			if (subiect.getName().equals(name))
-				subiect.printSubiect();
+				return subiect;
+		}
+		return null;
+	}
+
+	
+	public void editStudent_Name_idnumber(int id_number, String name, int new_id_number, String new_name) {
+		students.set(students.indexOf(searchStudent(name)), new Student(new_id_number, new_name));
+	}
+	
+	public void editSubiect_Name_id(int id_subiect,  String name, int new_id_subiect, String new_name) {
+		subiects.set(subiects.indexOf(searchSubiect(name)), new Subiect(new_id_subiect, new_name));
+	}
+	
+	
+	public void printSubiects(){
+		
+		System.out.println("List of Subiects:");
+		for(Subiect subiect: subiects){
+			subiect.printSubiect();
 		}
 	}
 
@@ -104,58 +107,6 @@ public class Studies {
 		System.out.println("List of Students:");
 		for(Student student: students){
 			student.printStudent();
-		}
-	}
-	
-	public void editStudent_Name(int id_number, String new_name) {
-		int position = 0;
-		for (Student student : students) {
-			if (student.getID_number().equals(id_number)) {
-				students.set(position, new Student(id_number, new_name));
-				break;
-			}
-			position++;
-		}
-	}
-	
-	public void editStudent_Number(int new_id_number, String name) {
-		int position = 0;
-		for (Student student : students) {
-			if (student.getName().equals(name)) {
-				students.set(position, new Student(new_id_number, name));
-				break;
-			}
-			position++;
-		}
-	}
-	
-	public void editSubiect_Name(int id_subiect, String new_name) {
-		int position = 0;
-		for (Subiect subiect : subiects) {
-			if (subiect.getID_subiect().equals(id_subiect)) {
-				subiects.set(position, new Subiect(id_subiect, new_name));
-				break;
-			}
-			position++;
-		}
-	}
-	
-	public void editSubiect_Number(int new_id_subiect, String name) {
-		int position = 0;
-		for (Subiect subiect : subiects) {
-			if (subiect.getName().equals(name)) {
-				subiects.set(position, new Subiect(new_id_subiect, name));
-				break;
-			}
-			position++;
-		}
-	}
-	
-	public void printSubiects(){
-		
-		System.out.println("List of Subiects:");
-		for(Subiect subiect: subiects){
-			subiect.printSubiect();
 		}
 	}
 	
