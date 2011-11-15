@@ -8,7 +8,7 @@
 
 	<target name="init">
 		<tstamp />
-		<mkdir dir="${bulid}" />
+		<mkdir dir="${build}" />
 		<mkdir dir="${dist}" />
 	</target>
 
