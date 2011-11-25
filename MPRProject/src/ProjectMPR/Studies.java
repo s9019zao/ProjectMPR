@@ -48,8 +48,8 @@ public class Studies {
 		this.subiects = subiects;
 	}
 
-	public void addStudent (int iD_number, String name){
-		students.add(new Student(iD_number, name));
+	public void addStudent (int iD_number, String name, String surname){
+		students.add(new Student(iD_number, name, surname));
 		
 	}
 	
@@ -58,18 +58,18 @@ public class Studies {
 		
 	}
 	
-	public void removeStudent(String name) {
-		students.remove(searchStudent(name));
+	public void removeStudent(String surname) {
+		students.remove(searchStudent(surname));
 	}
 	
 	public void removeSubiect(String name) {
 		subiects.remove(searchSubiect(name));
 	}
 	
-	public Student searchStudent(String name) {
+	public Student searchStudent(String surname) {
 	
 		for (Student student : students) {
-			if (student.getName().equals(name))
+			if (student.getSurname().equals(surname))
 			return student;
 		}
 		return null;
@@ -83,16 +83,33 @@ public class Studies {
 		}
 		return null;
 	}
-
 	
-	public void editStudent_Name_idnumber(int id_number, String name, int new_id_number, String new_name) {
-		students.set(students.indexOf(searchStudent(name)), new Student(new_id_number, new_name));
+	public void printStudent_by_surname(String surname) {
+		
+		for (Student student : students) {
+			if (student.getSurname().equals(surname))
+			student.printStudent();
+		}
+	}
+	
+	public void editStudent_Name_idnumber(int id_number, String name, String surname, int new_id_number, String new_name, String new_surname) {
+		students.set(students.indexOf(searchStudent(surname)), new Student(new_id_number, new_name, new_surname));
 	}
 	
 	public void editSubiect_Name_id(int id_subiect,  String name, int new_id_subiect, String new_name) {
 		subiects.set(subiects.indexOf(searchSubiect(name)), new Subiect(new_id_subiect, new_name));
 	}
 	
+	public void editManyStudent_Surname(Student s, String new_surname){
+		int possition = 0;
+		for(Student student : students){
+			if(s.getSurname().equalsIgnoreCase(student.getSurname())){
+				students.set(possition, new Student(s.getID_number(), s.getName(), new_surname));
+			}
+			possition++;
+		}
+
+	}
 	
 	public void printSubiects(){
 		

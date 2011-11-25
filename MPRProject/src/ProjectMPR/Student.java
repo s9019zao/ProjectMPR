@@ -4,11 +4,13 @@ public class Student {
 	
 	private int ID_number;
 	private String Name;
+	private String Surname;
 	
 	
-	public Student(int iD_number, String name) {
+	public Student(int iD_number, String name, String surname) {
 		this.ID_number = iD_number;
 		this.Name = name;
+		this.Surname = surname;
 		
 	}
 
@@ -28,11 +30,17 @@ public class Student {
 		Name = name;
 	}
 
-	
-	
+	public String getSurname() {
+		return Surname;
+	}
+
+	public void setSurname(String surname) {
+		Surname = surname;
+	}
+
 	public void printStudent()
 	{
-		System.out.println("ID Student: "+ID_number+" |Name Student: "+ Name);
+		System.out.println("ID Student: "+ID_number+" |Name Student: "+ Name + " " + Surname);
 	}
 	
 	
