@@ -26,7 +26,7 @@ public class Main {
 		Studies1.printSubiects();
 		Studies1.printStudents();
 		System.out.println("----------------");
-		Studies1.printStudent_by_surname("Kowalski");
+		Studies1.printStudent_by_surname(Studies1.searchStudent("Kowalski"));
 		Studies1.editManyStudent_Surname(Studies1.searchStudent("Wisniewski"), "Wiśniewski");
 		
 		Studies1.removeStudent("Bogdan Tomczyk");

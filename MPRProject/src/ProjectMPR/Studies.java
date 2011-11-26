@@ -84,10 +84,10 @@ public class Studies {
 		return null;
 	}
 	
-	public void printStudent_by_surname(String surname) {
+	public void printStudent_by_surname(Student s) {
 		
 		for (Student student : students) {
-			if (student.getSurname().equals(surname))
+			if (s.getSurname().equals(student.getSurname()))
 			student.printStudent();
 		}
 	}
@@ -103,7 +103,7 @@ public class Studies {
 	public void editManyStudent_Surname(Student s, String new_surname){
 		int possition = 0;
 		for(Student student : students){
-			if(s.getSurname().equalsIgnoreCase(student.getSurname())){
+			if(s.getSurname().equals(student.getSurname())){
 				students.set(possition, new Student(s.getID_number(), s.getName(), new_surname));
 			}
 			possition++;
