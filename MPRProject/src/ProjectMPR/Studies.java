@@ -17,13 +17,6 @@ public class Studies {
 		this.subiects = subiects;
 	}
 			
-	public Studies(String name) {
-		super();
-		this.Name = name;
-		this.students = new ArrayList<Student>();
-		this.subiects = new ArrayList<Subiect>();
-	}
-
 	public String getName() {
 		return Name;
 	}
@@ -103,8 +96,8 @@ public class Studies {
 	public void editManyStudent_Surname(Student s, String new_surname){
 		int possition = 0;
 		for(Student student : students){
-			if(s.getSurname().equals(student.getSurname())){
-				students.set(possition, new Student(s.getID_number(), s.getName(), new_surname));
+			if(student.getSurname().equals(s.getSurname())){
+				students.set(possition, new Student(student.getID_number(), student.getName(), new_surname));
 			}
 			possition++;
 		}

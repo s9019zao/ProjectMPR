@@ -17,7 +17,7 @@ public class Main {
 		Studies1.addStudent(1 , "Jan", "Kowalski");
 		Studies1.addStudent(2 , "Bogdan", "Tomczyk");
 		Studies1.addStudent(3 , "Roman", "Wisniewski");
-		Studies1.addStudent(4, "Jakub", "Kowalski");
+		Studies1.addStudent(4, "Jakub", "Wisniewski");
 		
 		Studies1.addSubiect( 1 ,"Subiect1");
 		Studies1.addSubiect( 10 ,"Subiect2");
