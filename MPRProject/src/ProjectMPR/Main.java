@@ -12,7 +12,7 @@ public class Main {
 
 		List<Subiect> subiects= new ArrayList<Subiect>();		
 		
-		Studies Studies1=new Studies("Studies1", students, subiects);
+		Studies Studies1 = new Studies("Studies1", students, subiects);
 		
 		Studies1.addStudent(1 , "Jan", "Kowalski");
 		Studies1.addStudent(2 , "Bogdan", "Tomczyk");
@@ -29,10 +29,10 @@ public class Main {
 		Studies1.printStudent_by_surname(Studies1.searchStudent("Kowalski"));
 		Studies1.editManyStudent_Surname(Studies1.searchStudent("Wisniewski"), "Wiśniewski");
 		
-		Studies1.removeStudent("Bogdan Tomczyk");
+		Studies1.removeStudent("Tomczyk");
 		Studies1.removeSubiect("Subiect3");
-		Studies1.editStudent_Name_idnumber(1 , "Jan", "Kowalski", 12, "Henryk", "Apostol");
-		Studies1.editSubiect_Name_id(1, "Subiect1", 15, "Subiect4");
+		Studies1.editStudent(1 , "Jan", "Kowalski", 12, "Henryk", "Apostol");
+		Studies1.editSubiect(1, "Subiect1", 15, "Subiect4");
 
 		Studies1.printAll();
 	}	

@@ -85,11 +85,11 @@ public class Studies {
 		}
 	}
 	
-	public void editStudent_Name_idnumber(int id_number, String name, String surname, int new_id_number, String new_name, String new_surname) {
+	public void editStudent(int id_number, String name, String surname, int new_id_number, String new_name, String new_surname) {
 		students.set(students.indexOf(searchStudent(surname)), new Student(new_id_number, new_name, new_surname));
 	}
 	
-	public void editSubiect_Name_id(int id_subiect,  String name, int new_id_subiect, String new_name) {
+	public void editSubiect(int id_subiect,  String name, int new_id_subiect, String new_name) {
 		subiects.set(subiects.indexOf(searchSubiect(name)), new Subiect(new_id_subiect, new_name));
 	}
 	
