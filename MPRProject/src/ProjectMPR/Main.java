@@ -3,6 +3,8 @@ package ProjectMPR;
 import java.util.ArrayList;
 import java.util.List;
 
+import ServicesProjectMPR.StudiesDBMenager;
+
 public class Main {
 
 	
@@ -12,7 +14,7 @@ public class Main {
 
 		List<Subiect> subiects= new ArrayList<Subiect>();		
 		
-		Studies Studies1 = new Studies("Studies1", students, subiects);
+		Studies Studies1 = new Studies("Studies7", students, subiects);
 		
 		Studies1.addStudent(1 , "Jan", "Kowalski");
 		Studies1.addStudent(2 , "Bogdan", "Tomczyk");
@@ -35,6 +37,14 @@ public class Main {
 		Studies1.editSubiect(1, "Subiect1", 15, "Subiect4");
 
 		Studies1.printAll();
+		
+		StudiesDBMenager db= new StudiesDBMenager();
+		db.addStudies(Studies1);
+
+		for(Studies s: db.getAllStudies())
+		{
+		System.out.println(s);
+		}
 	}	
 }
 
