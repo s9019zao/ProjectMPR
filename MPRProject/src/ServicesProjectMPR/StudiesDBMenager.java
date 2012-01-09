@@ -18,12 +18,10 @@ import ProjectMPR.Subiect;
 public class StudiesDBMenager {
 	
 	private Connection conn;
-
 	private Statement createTable;
-	
 	private PreparedStatement addStudiesStmt;
-	
 	private PreparedStatement getStudiesStmt;
+	private PreparedStatement deleteAllStudiesStmt;
 	
 	public StudiesDBMenager(){
 	
@@ -50,13 +48,11 @@ public class StudiesDBMenager {
 		")");
 		}
 		
-		addStudiesStmt=conn.prepareStatement("" +
-				"INSERT INTO Studies (name) VALUES (?)" +
-				"");
+		addStudiesStmt = conn.prepareStatement("" +"INSERT INTO Studies (name) VALUES (?)" +"");
 
-		getStudiesStmt=conn.prepareStatement("" +
-				"SELECT * FROM Studies" +
-				"");
+		getStudiesStmt = conn.prepareStatement("" +"SELECT * FROM Studies" +"");
+		
+		deleteAllStudiesStmt = conn.prepareStatement("DELETE FROM Studies");
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -94,6 +90,16 @@ public class StudiesDBMenager {
 	}
 
 	return studies;
+	}
+	
+	public void deleteAllStudies() {
+		try {
+			deleteAllStudiesStmt.executeUpdate();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

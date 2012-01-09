@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ServicesProjectMPR.StudiesDBMenager;
+import ServicesProjectMPR.StudentDBMenager;
+import ServicesProjectMPR.SubiectDBMenager;
 
 public class Main {
 
@@ -14,7 +16,7 @@ public class Main {
 
 		List<Subiect> subiects= new ArrayList<Subiect>();		
 		
-		Studies Studies1 = new Studies("Studies7", students, subiects);
+		Studies Studies1 = new Studies("Studies1", students, subiects);
 		
 		Studies1.addStudent(1 , "Jan", "Kowalski");
 		Studies1.addStudent(2 , "Bogdan", "Tomczyk");
@@ -38,13 +40,50 @@ public class Main {
 
 		Studies1.printAll();
 		
-		StudiesDBMenager db= new StudiesDBMenager();
-		db.addStudies(Studies1);
+//-------------------------DB------------------------		
+		StudiesDBMenager StudiesDB= new StudiesDBMenager();
+		StudiesDB.deleteAllStudies();
+		
+		Studies Studies2 = new Studies("Chemia", students, subiects);
+		StudiesDB.addStudies(Studies2);
 
-		for(Studies s: db.getAllStudies())
-		{
-		System.out.println(s);
+		for(Studies studies: StudiesDB.getAllStudies()){
+		System.out.println(studies);
 		}
+		
+		StudentDBMenager StudentDB= new StudentDBMenager();
+		StudentDB.deleteAllStudent();
+		
+		Student s1 = new Student(1 , "Jan", "Kowalski");
+		StudentDB.addDBStudent(s1);
+		Student s2 = new Student(2 , "Bogdan", "Tomczyk");
+		StudentDB.addDBStudent(s2);
+		Student s3 = new Student(3 , "Roman", "Wisniewski");
+		StudentDB.addDBStudent(s3);
+		
+		for(Student student: StudentDB.getAllStudent()){
+			System.out.println(student);
+			}
+		/* Usuwanie studenta z listy
+		StudentDB.deleteStudent(StudentDB.findStudentBySurname("Kowalski"));
+		*/
+		
+		SubiectDBMenager SubiectDB= new SubiectDBMenager();
+		SubiectDB.deleteAllSubiect();
+		
+		Subiect subiect1 = new Subiect(11, "Biochemia");
+		SubiectDB.addDBSubiect(subiect1);
+		Subiect subiect2 = new Subiect(12 , "Krystlochemia");
+		SubiectDB.addDBSubiect(subiect2);
+		Subiect subiect3 = new Subiect(13 , "Spektroskopia");
+		SubiectDB.addDBSubiect(subiect3);
+		
+		for(Subiect subiect: SubiectDB.getAllSubiect()){
+			System.out.println(subiect);
+			}
+		/* Usuwanie subiect z listy
+		SubiectDB.deleteSubiect(SubiectDB.findSubiectByName("Biochemia"));
+		*/
+	
 	}	
 }
-
