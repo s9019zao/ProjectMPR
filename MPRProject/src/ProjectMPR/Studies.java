@@ -9,6 +9,10 @@ public class Studies {
 	private List<Student> students= new ArrayList<Student>();
 	private List<Subiect> subiects= new ArrayList<Subiect>();
 	
+public Studies(String name) {
+		
+		this.Name = name;
+	}
 	
 	public Studies(String name, List<Student> students, List<Subiect> subiects) {
 		
@@ -41,8 +45,11 @@ public class Studies {
 		this.subiects = subiects;
 	}
 
-	public void addStudent (int iD_number, String name, String surname){
+	public void addStudent (int iD_number, String name, String surname) throws IndeksException {
+		if (iD_number > 0)
 		students.add(new Student(iD_number, name, surname));
+		else
+			throw new IndeksException("Indeks can't by less than 0");
 		
 	}
 	

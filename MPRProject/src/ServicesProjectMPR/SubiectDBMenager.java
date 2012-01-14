@@ -1,6 +1,5 @@
 package ServicesProjectMPR;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,10 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import ProjectMPR.Student;
-import ProjectMPR.Studies;
 import ProjectMPR.Subiect;
 
 public class SubiectDBMenager {
@@ -23,6 +19,7 @@ public class SubiectDBMenager {
 	private PreparedStatement getSubiectStmt;
 	private PreparedStatement deleteAllSubiectStmt;
 	private PreparedStatement findSubiectByNameStmt;
+	private PreparedStatement findSubiectBySubiect_nrStmt;
 	private PreparedStatement deleteSubiectStmt;	
 	
 	public SubiectDBMenager(){
@@ -57,6 +54,8 @@ public class SubiectDBMenager {
 			deleteAllSubiectStmt = conn.prepareStatement("DELETE FROM Subiect");
 			
 			findSubiectByNameStmt = conn.prepareStatement("SELECT * FROM Subiect WHERE name= ?");
+			
+			findSubiectBySubiect_nrStmt = conn.prepareStatement("SELECT * FROM Subiect WHERE subiect_nr= ?");
 			
 			deleteSubiectStmt = conn.prepareStatement("DELETE FROM Subiect WHERE ID = ?");
 			
@@ -117,6 +116,20 @@ public class SubiectDBMenager {
 				List<Integer> result = new ArrayList<Integer>();
 				findSubiectByNameStmt.setString(1, name);
 				ResultSet rs = findSubiectByNameStmt.executeQuery();
+				while (rs.next())
+					result.add(rs.getInt("ID"));
+				return result;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		public List<Integer> findSubiectBySubiect_nr(int subiect_nr) {
+			try {
+				List<Integer> result = new ArrayList<Integer>();
+				findSubiectBySubiect_nrStmt.setInt(1, subiect_nr);
+				ResultSet rs = findSubiectBySubiect_nrStmt.executeQuery();
 				while (rs.next())
 					result.add(rs.getInt("ID"));
 				return result;

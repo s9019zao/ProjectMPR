@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="MPRProject" default="dist" basedir=".">
-
-	<property name="src" location="src"/>
-	<property name="build" location="build"/>
-	<property name="dist" location="dist"/>
+<project name="MPRProject" default="test" basedir=".">
+	<property name="lib" location="lib">
+	</property>
+	<property name="build" location="build">
+	</property>
+	<property name="tests" location="tests">
+	</property>
+	<property name="src" location="src">
+	</property>
+	<property name="dist" location="dist">
+		</property>
 
 	<target name="init">
 		<tstamp />
-		<mkdir dir="${build}" />
+		<mkdir dir="$build}" />
 		<mkdir dir="${dist}" />
-	</target>
-
-	<target name="compile" depends="init">
-		<javac srcdir="${src}" destdir="${build}"/>
-	</target>
-
-	<target name="dist" depends="compile">
-		<mkdir dir="${dist}/lib"/>
+		<mkdir dir="${lib}" />
+		<mkdir dir="${tests}" />
 	</target>
 	
-	<target name="jar" depends="dist">
-		<jar jarfile="${dist}/lib/MPRProject-${DSTAMP}.jar" basedir="${build}"/>
+	<path id="classpath">
+		<fileset dir="${lib}" includes="**/*.jar">
+		</fileset>
+		<pathelement location="${build}" />
+	</path>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" includeantruntime="false">
+		</javac>
 	</target>
+
+	<target name="jar" depends="compile">
+		<jar jarfile="dist/MPRProject-${DSTAMP}.jar" basedir="build">
+		</jar>
+	</target>
+
+	<target name="test" depends="compile">
+			 <junit fork="no" >
+			<formatter type="xml"/>
+		  		<test name="TestProjectMPR.TestStudent" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestStudentDBMenager" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestStudentSubiectDBMenager" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestStudies" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestStudiesDBMenager" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestSubiect" todir="${tests}"/>
+			 	<test name="TestProjectMPR.TestSubiectDBMenager" todir="${tests}"/>
+			<classpath refid="metody.classpath"/>
+		</junit>
+			</target>
+	
+	<target name="run" depends="compile">
+			<java classname="ProjectMPR.Main" classpathref="classpath" />
+		</target>
 	
 	<target name="clean">
 		<delete dir="${build}">
 		</delete>
+		<delete dir="${tests}">
+		</delete>
+		<delete dir="${lib}">
+		</delete>
 		<delete dir="${dist}">
 		</delete>
 	</target>
+	
 </project>

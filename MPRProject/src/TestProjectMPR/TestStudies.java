@@ -141,5 +141,5 @@ public class TestStudies {
 		
 		assertTrue(subiects.size() == 1);
 	}
-
+	
 }

@@ -10,6 +10,9 @@ public class Subiect {
 		this.ID_subiect = iD_subiect;
 		this.Name = name;
 	}
+	
+	public Subiect() {	
+	}
 
 	public Integer getID_subiect() {
 		return ID_subiect;

@@ -1,6 +1,5 @@
 package ServicesProjectMPR;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import ProjectMPR.Student;
 import ProjectMPR.Studies;
@@ -21,6 +19,8 @@ public class StudiesDBMenager {
 	private Statement createTable;
 	private PreparedStatement addStudiesStmt;
 	private PreparedStatement getStudiesStmt;
+	private PreparedStatement findStudiesByNameStmt;
+	private PreparedStatement deleteStudiesStmt;
 	private PreparedStatement deleteAllStudiesStmt;
 	
 	public StudiesDBMenager(){
@@ -52,44 +52,73 @@ public class StudiesDBMenager {
 
 		getStudiesStmt = conn.prepareStatement("" +"SELECT * FROM Studies" +"");
 		
+		findStudiesByNameStmt = conn.prepareStatement("SELECT * FROM Studies WHERE name= ?");
+		
+		deleteStudiesStmt = conn.prepareStatement("DELETE FROM Studies WHERE ID = ?");
+		
 		deleteAllStudiesStmt = conn.prepareStatement("DELETE FROM Studies");
 		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
+		} catch (SQLException e) {
+		
 		e.printStackTrace();
+		}
 	}
+	
+	public List<Integer> findStudiesByName(String name) {
+		try {
+			List<Integer> result = new ArrayList<Integer>();
+			findStudiesByNameStmt.setString(1, name);
+			ResultSet rs = findStudiesByNameStmt.executeQuery();
+			while (rs.next())
+				result.add(rs.getInt("ID"));
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
+	
 	public void addStudies(Studies s){
-	try {
-	addStudiesStmt.setString(1, s.getName());
+		try {
+			addStudiesStmt.setString(1, s.getName());
 
-	addStudiesStmt.executeUpdate();
+			addStudiesStmt.executeUpdate();
 
-	} catch (SQLException e) {
+		} catch (SQLException e) {
 
-	e.printStackTrace();
+			e.printStackTrace();
+		}
+
 	}
 
-	}
+	public List<Studies> getAllStudies(){
+		List<Studies> studies=new ArrayList<Studies>();
 
-	public List<Studies> getAllStudies()
-	{
-	List<Studies> studies=new ArrayList<Studies>();
+		try {
+			ResultSet rs= getStudiesStmt.executeQuery();
 
-	try {
-	ResultSet rs= getStudiesStmt.executeQuery();
+			while(rs.next())
+			{
+				studies.add(new Studies(rs.getString("name")));
+			}
 
-	while(rs.next())
-	{
-	studies.add(new Studies(rs.getString("name"),new ArrayList<Student>(),new ArrayList<Subiect>()));
-	}
-
-	} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-	}
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}
 
 	return studies;
+	}
+	
+	public void deleteStudies(List<Integer> studies) {
+		try {
+			for (Integer id : studies) {
+				deleteStudiesStmt.setInt(1, id);
+				deleteStudiesStmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void deleteAllStudies() {
@@ -101,5 +130,6 @@ public class StudiesDBMenager {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
