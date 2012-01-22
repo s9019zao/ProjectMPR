@@ -5,6 +5,11 @@ public class Subiect {
 	private int ID_subiect;
 	private String Name;
 	
+	public String toString()
+	{
+		return "ID przedmiotu "+ Name +": "+id;
+	}
+	
 	public Subiect(int iD_subiect, String name) {
 		
 		this.ID_subiect = iD_subiect;
